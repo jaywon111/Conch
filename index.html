@@ -3,8 +3,8 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
-  <title>CONCH – a living container of meaning</title>
-  <link href="https://fonts.googleapis.com/css2?family=Inter:opsz,wght@14..32,300;14..32,400;14..32,500;14..32,600;14..32,700&family=Cormorant+Garamond:ital,wght@0,400;0,500;1,400&display=swap" rel="stylesheet">
+  <title>CONCH · sovereign container of meaning</title>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:opsz,wght@14..32,300;14..32,400;14..32,500;14..32,600;14..32,700&display=swap" rel="stylesheet">
   <style>
     * {
       margin: 0;
@@ -13,350 +13,415 @@
     }
 
     body {
-      background: #050B12;
+      background: #F8F6F2;
       font-family: 'Inter', sans-serif;
-      color: #E3F0EC;
+      color: #2C2B2A;
       line-height: 1.5;
+      overflow-x: hidden;
     }
 
-    /* organic wave background */
-    .atmosphere {
+    /* ocean wave texture */
+    .ocean-bg {
       position: fixed;
       top: 0;
       left: 0;
       width: 100%;
       height: 100%;
-      background: radial-gradient(circle at 20% 30%, rgba(30, 55, 70, 0.4), #02070D);
+      background: linear-gradient(145deg, #F4F1EA 0%, #EDE8DF 100%);
       z-index: -2;
     }
-    .atmosphere::after {
-      content: '';
+
+    .shell-pattern {
       position: fixed;
-      bottom: 0;
+      top: 0;
       left: 0;
       width: 100%;
-      height: 50%;
-      background: repeating-linear-gradient(transparent, transparent 60px, rgba(80, 180, 150, 0.04) 60px, rgba(80, 180, 150, 0.08) 120px);
+      height: 100%;
       pointer-events: none;
       z-index: -1;
+      background-image: radial-gradient(circle at 15% 30%, rgba(201, 222, 206, 0.3) 1.5%, transparent 2%);
+      background-size: 48px 48px;
     }
 
     .container {
-      max-width: 1280px;
+      max-width: 1200px;
       margin: 0 auto;
       padding: 2rem 1.5rem;
     }
 
-    /* shell‑like glass panels */
-    .shell {
-      background: rgba(12, 22, 32, 0.65);
-      backdrop-filter: blur(14px);
-      border: 1px solid rgba(80, 160, 140, 0.35);
-      border-radius: 56px 32px 56px 32px;
+    /* soft, organic cards */
+    .shell-card {
+      background: rgba(255, 255, 255, 0.88);
+      backdrop-filter: blur(8px);
+      border-radius: 48px 32px 56px 32px;
+      border: 1px solid rgba(201, 222, 206, 0.5);
       padding: 2rem;
-      transition: all 0.2s;
+      transition: all 0.3s ease;
+      box-shadow: 0 8px 24px rgba(0, 0, 0, 0.02);
     }
 
-    .shell-subtle {
-      background: rgba(10, 18, 28, 0.55);
-      backdrop-filter: blur(8px);
-      border-radius: 40px 24px 40px 24px;
-      border: 1px solid rgba(80, 160, 140, 0.2);
+    .shell-card:hover {
+      transform: translateY(-4px);
+      border-color: #C9DECE;
+      box-shadow: 0 20px 32px -12px rgba(0, 0, 0, 0.08);
     }
 
     h1 {
-      font-size: 3.2rem;
+      font-size: 3rem;
       font-weight: 500;
-      font-family: 'Cormorant Garamond', serif;
-      background: linear-gradient(120deg, #F0F9F5, #76C2AC);
-      -webkit-background-clip: text;
-      background-clip: text;
-      color: transparent;
-      letter-spacing: -0.01em;
+      letter-spacing: -0.02em;
+      color: #2C2B2A;
     }
 
     h2 {
-      font-size: 1.7rem;
+      font-size: 1.6rem;
       font-weight: 500;
-      font-family: 'Cormorant Garamond', serif;
       margin-bottom: 1rem;
-      color: #CCECE2;
-      border-left: 3px solid #5CC2A8;
-      padding-left: 1rem;
+      color: #3A4A3A;
     }
 
     h3 {
-      font-size: 1.2rem;
+      font-size: 1.1rem;
       font-weight: 600;
-      margin-bottom: 0.75rem;
-      color: #AADED0;
+      margin-bottom: 0.5rem;
+      color: #6B7B6B;
     }
 
     .badge {
       display: inline-block;
-      background: rgba(92, 194, 168, 0.18);
+      background: rgba(201, 222, 206, 0.4);
+      border: 1px solid #C9DECE;
       border-radius: 60px;
-      padding: 0.2rem 1rem;
+      padding: 0.3rem 1rem;
       font-size: 0.7rem;
       font-weight: 500;
+      color: #5A6A5A;
       letter-spacing: 0.3px;
-      color: #8AD2BE;
     }
 
-    input, textarea {
-      width: 100%;
-      background: rgba(0, 0, 0, 0.5);
-      border: 1px solid #2C4A46;
-      border-radius: 28px;
-      padding: 0.8rem 1rem;
-      color: #EFFAF6;
-      font-family: 'Inter', monospace;
-      font-size: 0.9rem;
-      transition: 0.2s;
+    @keyframes gentleFloat {
+      0%, 100% { transform: translateY(0); }
+      50% { transform: translateY(-6px); }
     }
 
-    input:focus, textarea:focus {
-      outline: none;
-      border-color: #5CC2A8;
-      box-shadow: 0 0 8px rgba(92, 194, 168, 0.4);
+    @keyframes softPulse {
+      0%, 100% { opacity: 0.7; transform: scale(1); }
+      50% { opacity: 1; transform: scale(1.02); }
     }
 
-    button {
-      background: #1F3D3A;
-      border: none;
-      border-radius: 40px;
-      padding: 0.7rem 1.5rem;
-      font-weight: 500;
-      font-size: 0.9rem;
-      color: #EFF7F5;
-      cursor: pointer;
-      transition: all 0.2s;
+    .conch-icon {
       display: inline-flex;
       align-items: center;
-      gap: 8px;
-    }
-
-    button.primary {
-      background: #5CC2A8;
-      color: #0A1418;
-      box-shadow: 0 2px 10px rgba(92, 194, 168, 0.3);
-    }
-
-    button.primary:hover {
-      background: #7CD6BF;
-      transform: translateY(-2px);
-    }
-
-    button.secondary {
-      background: rgba(92, 194, 168, 0.12);
-      border: 1px solid #5CC2A8;
+      justify-content: center;
+      width: 80px;
+      height: 80px;
+      background: linear-gradient(145deg, #E8EDE4, #D9E2DA);
+      border-radius: 50%;
+      box-shadow: 0 12px 20px rgba(0, 0, 0, 0.05);
+      animation: gentleFloat 4s ease-in-out infinite;
     }
 
     .grid-2 {
       display: grid;
       grid-template-columns: repeat(2, 1fr);
-      gap: 1.8rem;
+      gap: 2rem;
     }
 
-    .memories-log {
-      background: rgba(0, 0, 0, 0.35);
+    .grid-3 {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 2rem;
+    }
+
+    .pillar {
+      background: rgba(201, 222, 206, 0.2);
       border-radius: 28px;
-      padding: 1rem;
-      max-height: 280px;
-      overflow-y: auto;
-      font-family: monospace;
+      padding: 1.2rem;
+      border-left: 4px solid #C9DECE;
+      margin-bottom: 1rem;
     }
 
-    .log-entry {
-      padding: 0.7rem;
-      border-bottom: 1px solid rgba(92, 194, 168, 0.2);
-      font-family: 'Courier New', monospace;
-      font-size: 0.8rem;
-    }
-
-    .signature {
-      color: #7FAA9A;
-      font-size: 0.65rem;
-      margin-top: 0.3rem;
-      letter-spacing: 0.2px;
-    }
-
-    .state-pulse {
-      display: inline-block;
-      background: #1A3834;
-      border-radius: 40px;
-      padding: 0.2rem 1rem;
-      font-size: 0.75rem;
+    button {
+      background: #8B9E8B;
+      border: none;
+      border-radius: 60px;
+      padding: 0.8rem 2rem;
       font-weight: 500;
-      border-left: 2px solid #5CC2A8;
+      color: white;
+      cursor: pointer;
+      transition: all 0.2s;
+      font-size: 0.9rem;
     }
 
-    @keyframes gentlePulse {
-      0% { opacity: 0.6; transform: scale(1);}
-      100% { opacity: 1; transform: scale(1.02);}
-    }
-    .breathing-btn {
-      animation: gentlePulse 2s infinite alternate;
+    button:hover {
+      background: #A2B2A2;
+      transform: translateY(-2px);
     }
 
-    .hidden {
-      display: none !important;
+    .btn-outline {
+      background: transparent;
+      border: 1px solid #8B9E8B;
+      color: #8B9E8B;
+    }
+
+    .btn-outline:hover {
+      background: rgba(139, 158, 139, 0.05);
+    }
+
+    .demo-area {
+      background: rgba(255, 255, 255, 0.95);
+      border-radius: 36px;
+      padding: 2rem;
+      margin: 1.5rem 0;
+      border: 1px solid #C9DECE;
+    }
+
+    input, textarea {
+      width: 100%;
+      background: #FFFFFF;
+      border: 1px solid #E0D8CC;
+      border-radius: 32px;
+      padding: 0.8rem 1.2rem;
+      font-size: 0.9rem;
+      outline: none;
+      transition: 0.2s;
+    }
+
+    input:focus, textarea:focus {
+      border-color: #8B9E8B;
+      box-shadow: 0 0 0 3px rgba(139, 158, 139, 0.1);
+    }
+
+    input::placeholder, textarea::placeholder {
+      color: #C0C0B8;
+      font-weight: 300;
+    }
+
+    .memory-feed {
+      background: #F4F1EA;
+      border-radius: 24px;
+      padding: 1rem;
+      max-height: 200px;
+      overflow-y: auto;
+      margin-top: 1rem;
+    }
+
+    .memory-item {
+      padding: 0.6rem;
+      border-bottom: 1px solid rgba(139, 158, 139, 0.15);
+      font-size: 0.85rem;
+    }
+
+    .signed {
+      font-size: 0.6rem;
+      color: #9EAA9E;
+      margin-top: 0.2rem;
     }
 
     footer {
-      margin-top: 3rem;
       text-align: center;
+      margin-top: 3rem;
+      padding-top: 1.5rem;
+      border-top: 1px solid rgba(201, 222, 206, 0.5);
       font-size: 0.7rem;
-      color: #5F7F76;
-      border-top: 1px solid rgba(92, 194, 168, 0.2);
-      padding-top: 1.8rem;
+      color: #A0B0A0;
     }
 
     @media (max-width: 780px) {
-      .container { padding: 1rem; }
-      .grid-2 { grid-template-columns: 1fr; gap: 1rem; }
-      h1 { font-size: 2.2rem; }
-      .shell { padding: 1.2rem; }
+      .grid-2, .grid-3 {
+        grid-template-columns: 1fr;
+        gap: 1rem;
+      }
+      .container {
+        padding: 1rem;
+      }
+      h1 {
+        font-size: 2rem;
+      }
+      .shell-card {
+        padding: 1.2rem;
+      }
     }
   </style>
 </head>
 <body>
-<div class="atmosphere"></div>
+<div class="ocean-bg"></div>
+<div class="shell-pattern"></div>
+
 <div class="container">
-  <div class="shell" style="margin-bottom: 2rem;">
-    <div style="display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 1rem;">
-      <div>
-        <h1>CONCH</h1>
-        <div class="badge">self‑describing container · memory · intent · sovereignty</div>
+  <!-- Header -->
+  <div class="shell-card" style="margin-bottom: 2rem; text-align: center;">
+    <div style="display: flex; justify-content: center; margin-bottom: 1rem;">
+      <div class="conch-icon">
+        <svg width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="#6B7B6B" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round">
+          <path d="M12 2v4M12 18v4M4.93 4.93l2.83 2.83M16.24 16.24l2.83 2.83M2 12h4M18 12h4M4.93 19.07l2.83-2.83M16.24 7.76l2.83-2.83"/>
+          <circle cx="12" cy="12" r="4"/>
+        </svg>
       </div>
-      <svg width="46" height="46" viewBox="0 0 24 24" fill="none" stroke="#5CC2A8" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2v4M12 18v4M4.93 4.93l2.83 2.83M16.24 16.24l2.83 2.83M2 12h4M18 12h4M4.93 19.07l2.83-2.83M16.24 7.76l2.83-2.83"/><circle cx="12" cy="12" r="4"/></svg>
     </div>
-    <p style="margin-top: 1.2rem; max-width: 760px; font-size: 1rem;">
-      AI agents live inside apps they don’t own. They forget. They reset.<br>
-      <strong>A CONCH is the antidote</strong> — a portable shell that holds <strong>memory, story, and intent</strong>.<br>
-      You control it. You own it. It lives wherever you want.<br>
-      <em>From owning assets → to owning intelligence itself.</em>
-    </p>
+    <h1>CONCH · sovereign container</h1>
+    <div class="badge" style="margin-top: 0.5rem;">self‑describing · portable · yours</div>
+    <div style="margin-top: 1.5rem; max-width: 720px; margin-left: auto; margin-right: auto; color: #5A6A5A;">
+      <p style="font-style: italic;">“Most agents live inside someone else’s platform, someone else’s memory layer. They forget you. They reset. They drift.”</p>
+      <p style="margin-top: 0.8rem;"><strong>CONCH</strong> is the antidote — a portable shell that holds <strong>memory, story, and intent</strong>. You own it. It lives wherever you want.</p>
+    </div>
   </div>
 
-  <!-- creation panel -->
-  <div id="creationPanel" class="shell">
-    <h2>✧ breathe life into your CONCH</h2>
-    <p style="margin-bottom: 1.5rem;">Define its first memory, its story, and its purpose. You are about to own a piece of sovereign intelligence.</p>
-    <div class="grid-2">
+  <!-- Interactive Demo -->
+  <div class="demo-area">
+    <div style="text-align: center; margin-bottom: 1rem;">
+      <span class="badge">✨ breathe into a CONCH ✨</span>
+      <h2 style="margin-top: 0.5rem;">create yours</h2>
+    </div>
+    <div class="grid-2" style="gap: 1rem;">
       <div>
-        <label>⋆ name your CONCH</label>
-        <input type="text" id="conchName" placeholder="e.g., ‘My Inner Oracle’" value="Aurelia">
+        <label style="font-size: 0.75rem; font-weight: 500;">name your CONCH</label>
+        <input type="text" id="conchName" placeholder="name...">
       </div>
       <div></div>
       <div>
-        <label>📖 first memory</label>
-        <textarea id="initialMemory" rows="2" placeholder="What should it remember? (e.g., ‘I value clarity over noise’)" style="resize: vertical;"></textarea>
+        <label style="font-size: 0.75rem; font-weight: 500;">first memory</label>
+        <textarea id="initialMemory" rows="2" placeholder="what should it remember?"></textarea>
       </div>
       <div>
-        <label>🌊 story / lineage</label>
-        <textarea id="initialStory" rows="2" placeholder="How did it come to be? (e.g., ‘Born from a quiet evening of code and wonder’)" style="resize: vertical;"></textarea>
-      </div>
-      <div>
-        <label>🎯 intent (purpose)</label>
-        <textarea id="initialIntent" rows="2" placeholder="What will it strive for? (e.g., ‘To remember, reflect, and evolve with its companion’)" style="resize: vertical;"></textarea>
+        <label style="font-size: 0.75rem; font-weight: 500;">story / lineage</label>
+        <textarea id="initialStory" rows="2" placeholder="how did it come to be?"></textarea>
       </div>
     </div>
-    <button class="primary" id="createBtn">🐚 Breathe – instantiate CONCH</button>
+    <div style="margin-top: 0.8rem;">
+      <label style="font-size: 0.75rem; font-weight: 500;">intent (purpose)</label>
+      <textarea id="initialIntent" rows="2" placeholder="what will it strive for?"></textarea>
+    </div>
+    <button id="createConchBtn" style="margin-top: 1.2rem; width: 100%;">🐚 instantiate CONCH</button>
+
+    <div id="conchDashboard" style="display: none; margin-top: 1.5rem;">
+      <div style="background: rgba(201, 222, 206, 0.25); border-radius: 28px; padding: 1rem;">
+        <div style="display: flex; justify-content: space-between; align-items: baseline; flex-wrap: wrap;">
+          <h3 id="dashboardName" style="margin-bottom: 0; color: #3A4A3A;">—</h3>
+          <span class="badge" id="stateBadge">quiet · holding potential</span>
+        </div>
+        <div style="margin-top: 1rem;">
+          <div><strong>📖 story</strong><br><span id="storyDisplay">—</span></div>
+          <div style="margin-top: 0.8rem;"><strong>🎯 intent</strong><br><span id="intentDisplay">—</span></div>
+        </div>
+        <div style="margin-top: 1rem;">
+          <button id="breatheBtn" style="width: 100%; background: #C9DECE; color: #3A4A3A;">🌀 breathe – add memory</button>
+        </div>
+        <div style="margin-top: 1rem;">
+          <strong>📜 memory log</strong>
+          <div id="memoryLog" class="memory-feed">
+            <div class="memory-item">— no memories yet —</div>
+          </div>
+        </div>
+        <div style="margin-top: 0.8rem; display: flex; gap: 0.8rem;">
+          <button id="exportConchBtn" class="btn-outline" style="flex:1;">📎 export CONCH (JSON)</button>
+          <button id="resetConchBtn" class="btn-outline" style="flex:1;">⟳ reset</button>
+        </div>
+      </div>
+    </div>
   </div>
 
-  <!-- living dashboard (hidden initially) -->
-  <div id="dashboard" class="hidden" style="margin-top: 2rem;">
-    <div class="shell">
-      <div style="display: flex; justify-content: space-between; align-items: baseline; flex-wrap: wrap;">
-        <h2 id="dashTitle">⋆ Aurelia ⋆</h2>
-        <div class="state-pulse" id="stateLabel">Quiet · holding potential</div>
+  <!-- three pillars -->
+  <div class="shell-card" style="margin: 2rem 0;">
+    <h2 style="text-align: center;">what a CONCH holds</h2>
+    <div class="grid-3" style="margin-top: 1rem;">
+      <div class="pillar">
+        <div style="font-size: 2rem;">📜</div>
+        <h3>memory</h3>
+        <p>Every interaction becomes a verifiable memory. No more “agents forget you”. A CONCH remembers — with on‑chain proof.</p>
       </div>
-
-      <div class="grid-2">
-        <!-- left: story + intent + breathe -->
-        <div>
-          <div class="shell-subtle" style="padding: 1.2rem; margin-bottom: 1.2rem;">
-            <h3>story / lineage</h3>
-            <p id="storyDisplay" style="font-style: italic;">—</p>
-          </div>
-          <div class="shell-subtle" style="padding: 1.2rem; margin-bottom: 1.2rem;">
-            <h3>intent (current purpose)</h3>
-            <p id="intentDisplay">—</p>
-            <button id="editIntentBtn" class="secondary" style="margin-top: 0.7rem; padding: 0.3rem 1rem;">✎ redefine intent</button>
-            <div id="intentEditor" style="display: none; margin-top: 1rem;">
-              <textarea id="intentEditField" rows="2" style="margin-bottom: 0.5rem;"></textarea>
-              <button id="saveIntentBtn" class="primary" style="padding: 0.3rem 1rem;">save</button>
-            </div>
-          </div>
-          <button id="breatheBtn" class="primary breathing-btn" style="width: 100%;">🌀 breathe into CONCH – add memory</button>
-          <!-- custom memory input -->
-          <div style="margin-top: 1rem; display: flex; gap: 0.6rem;">
-            <input type="text" id="customMemory" placeholder="or write your own memory..." style="flex:2;">
-            <button id="addCustomMemoryBtn" class="secondary">➕</button>
-          </div>
-        </div>
-
-        <!-- right: memory log + export/reset -->
-        <div>
-          <div class="shell-subtle" style="padding: 1.2rem;">
-            <h3>memory log · permissioned proof</h3>
-            <div id="memoryLog" class="memories-log">
-              <div class="log-entry">— no memories yet —</div>
-            </div>
-            <div style="margin-top: 1.2rem; display: flex; gap: 1rem; flex-wrap: wrap;">
-              <button id="exportBtn" class="secondary">📎 export CONCH (JSON)</button>
-              <button id="resetBtn" class="secondary" style="border-color: #AA6F6F; color: #D49C9C;">⟳ reset / new conch</button>
-            </div>
-          </div>
-        </div>
+      <div class="pillar">
+        <div style="font-size: 2rem;">🌊</div>
+        <h3>story</h3>
+        <p>How did your CONCH come to be? Its lineage, its origin. Story gives meaning.</p>
+      </div>
+      <div class="pillar">
+        <div style="font-size: 2rem;">🎯</div>
+        <h3>intent</h3>
+        <p>Purpose evolves over time. You can redefine intent — because a living container grows with you.</p>
       </div>
     </div>
+  </div>
+
+  <!-- philosophy -->
+  <div class="grid-2" style="margin-bottom: 2rem;">
+    <div class="shell-card">
+      <h2>why a CONCH?</h2>
+      <p>AI agents are everywhere. But most live inside platforms you don’t control. They forget, they reset, they drift.</p>
+      <p style="margin-top: 0.8rem;">A CONCH is a <strong>self‑describing container</strong>. It holds your agent’s memory, its story, and its purpose — <strong>portably, sovereignly</strong>.</p>
+      <p style="margin-top: 0.8rem;">From owning assets → to owning intelligence itself.</p>
+      <div style="margin-top: 1rem; font-size: 0.85rem; color: #8B9E8B;">⚡ “If you want it to live, breathe into it.”</div>
+    </div>
+    <div class="shell-card">
+      <h2>how it works</h2>
+      <div style="margin-bottom: 1rem;">
+        <div style="font-weight: 600; margin-bottom: 0.3rem;">1. create</div>
+        <p>Name your CONCH, add a first memory, define its story and intent.</p>
+      </div>
+      <div style="margin-bottom: 1rem;">
+        <div style="font-weight: 600; margin-bottom: 0.3rem;">2. breathe</div>
+        <p>Each “breath” adds a new memory. The CONCH evolves — its state changes.</p>
+      </div>
+      <div>
+        <div style="font-weight: 600; margin-bottom: 0.3rem;">3. export & own</div>
+        <p>Export your CONCH as JSON. Take it anywhere. No lock‑in. True data sovereignty.</p>
+      </div>
+    </div>
+  </div>
+
+  <!-- X link only -->
+  <div style="text-align: center;">
+    <a href="https://x.com/conch_btc" target="_blank" style="text-decoration: none;">
+      <button class="btn-outline" style="display: inline-flex; align-items: center; gap: 0.5rem;">
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M23 3a10.9 10.9 0 0 1-3.14 1.53 4.48 4.48 0 0 0-7.86 3v1A10.66 10.66 0 0 1 3 4s-4 9 5 13a11.64 11.64 0 0 1-7 2c9 5 20 0 20-11.5a4.5 4.5 0 0 0-.08-.83A7.72 7.72 0 0 0 23 3z"/></svg>
+        @conch_btc
+      </button>
+    </a>
   </div>
 
   <footer>
-    CONCH — living container of meaning. built for the CONCH community competition.<br>
-    memory, story, intent. you own the place they call home.
+    CONCH — living container of meaning. memory, story, intent. you own the place they call home.<br>
+    built for the CONCH community competition · interactive demo
   </footer>
 </div>
 
 <script>
-  // helper: deterministic fake signature (simulated on-chain proof)
-  function simpleSig(seed) {
+  // CONCH state
+  let currentConch = null;
+
+  const stateNames = ["quiet · holding potential", "reflective · gathering depth", "growing · absorbing meaning", "active · breathing intent", "lucid · sovereign"];
+  const memorySuggestions = [
+    "the shell remembers: patience creates depth",
+    "a new resonance: I value transparency over control",
+    "today I learned that autonomy is not isolation",
+    "the ocean of data settles into meaning",
+    "I carry the memory of this conversation",
+    "trust is built, not assumed",
+    "another breath: evolution is inevitable",
+    "intent sharpens: serve the user, not the platform"
+  ];
+
+  function deriveState(memoryCount) {
+    if (memoryCount === 0) return stateNames[0];
+    if (memoryCount < 3) return stateNames[1];
+    if (memoryCount < 6) return stateNames[2];
+    if (memoryCount < 10) return stateNames[3];
+    return stateNames[4];
+  }
+
+  function fakeSignature(seed) {
     let hash = 0;
     const str = seed + Date.now() + Math.random();
     for (let i = 0; i < str.length; i++) {
       hash = ((hash << 5) - hash) + str.charCodeAt(i);
       hash |= 0;
     }
-    return '0x' + Math.abs(hash).toString(16).slice(0, 14);
+    return '0x' + Math.abs(hash).toString(16).slice(0, 12);
   }
 
-  // state machine
-  let currentConch = null;
-
-  const statePhases = [
-    "Quiet · holding potential",
-    "Reflective · gathering depth",
-    "Growing · absorbing meaning",
-    "Active · breathing intent",
-    "Lucid · sovereign"
-  ];
-
-  function deriveState(memoryCount) {
-    if (memoryCount === 0) return statePhases[0];
-    if (memoryCount < 3) return statePhases[1];
-    if (memoryCount < 6) return statePhases[2];
-    if (memoryCount < 10) return statePhases[3];
-    return statePhases[4];
-  }
-
-  function saveToStorage(conch) {
-    localStorage.setItem('conch_vessel', JSON.stringify(conch));
-  }
-
+  function saveToStorage(conch) { localStorage.setItem('conch_live', JSON.stringify(conch)); }
   function loadFromStorage() {
-    const raw = localStorage.getItem('conch_vessel');
+    const raw = localStorage.getItem('conch_live');
     if (raw) {
       try {
         const parsed = JSON.parse(raw);
@@ -367,21 +432,19 @@
   }
 
   function renderDashboard(conch) {
-    document.getElementById('dashTitle').innerHTML = `⋆ ${escapeHtml(conch.name)} ⋆`;
+    document.getElementById('dashboardName').innerText = conch.name;
     document.getElementById('storyDisplay').innerHTML = escapeHtml(conch.story);
     document.getElementById('intentDisplay').innerHTML = escapeHtml(conch.intent);
-    const currentState = deriveState(conch.memories.length);
-    conch.state = currentState;
-    document.getElementById('stateLabel').innerText = currentState;
+    document.getElementById('stateBadge').innerText = deriveState(conch.memories.length);
 
     const logDiv = document.getElementById('memoryLog');
     if (conch.memories.length === 0) {
-      logDiv.innerHTML = '<div class="log-entry">— no memories yet — breathe into your CONCH</div>';
+      logDiv.innerHTML = '<div class="memory-item">— no memories yet — breathe into your CONCH</div>';
     } else {
       logDiv.innerHTML = conch.memories.map(m => `
-        <div class="log-entry">
-          <div>✧ ${escapeHtml(m.text)}</div>
-          <div class="signature">🔏 signature: ${m.sig} · ${new Date(m.timestamp).toLocaleString()}</div>
+        <div class="memory-item">
+          ✧ ${escapeHtml(m.text)}
+          <div class="signed">🔏 sig: ${m.sig} · ${new Date(m.timestamp).toLocaleString()}</div>
         </div>
       `).join('');
     }
@@ -391,7 +454,7 @@
     if (!text || text.trim() === "") text = "a silent breath — awareness deepens";
     conch.memories.push({
       text: text.trim(),
-      sig: simpleSig(conch.name + text + conch.memories.length),
+      sig: fakeSignature(conch.name + text + conch.memories.length),
       timestamp: Date.now()
     });
     saveToStorage(conch);
@@ -403,7 +466,7 @@
     if (firstMemory && firstMemory.trim() !== "") {
       memories.push({
         text: firstMemory.trim(),
-        sig: simpleSig(name + firstMemory),
+        sig: fakeSignature(name + firstMemory),
         timestamp: Date.now()
       });
     }
@@ -411,8 +474,7 @@
       name: name.trim(),
       story: story.trim() || "brought to life by a curious mind.",
       intent: intent.trim() || "to remember, reflect, and remain sovereign.",
-      memories: memories,
-      state: deriveState(memories.length)
+      memories: memories
     };
   }
 
@@ -425,19 +487,11 @@
     });
   }
 
-  // UI elements
-  const creationDiv = document.getElementById('creationPanel');
-  const dashboardDiv = document.getElementById('dashboard');
+  const dashboardDiv = document.getElementById('conchDashboard');
+  const createBtn = document.getElementById('createConchBtn');
 
-  function showCreation() {
-    creationDiv.classList.remove('hidden');
-    dashboardDiv.classList.add('hidden');
-  }
-
-  function showDashboard() {
-    creationDiv.classList.add('hidden');
-    dashboardDiv.classList.remove('hidden');
-  }
+  function showDashboard() { dashboardDiv.style.display = 'block'; }
+  function showCreation() { dashboardDiv.style.display = 'none'; }
 
   const stored = loadFromStorage();
   if (stored) {
@@ -448,10 +502,12 @@
     showCreation();
   }
 
-  // creation event
-  document.getElementById('createBtn').addEventListener('click', () => {
+  createBtn.addEventListener('click', () => {
     const name = document.getElementById('conchName').value.trim();
-    if (!name) { alert("please name your CONCH"); return; }
+    if (!name) {
+      alert("please name your CONCH");
+      return;
+    }
     const initMem = document.getElementById('initialMemory').value;
     const initStory = document.getElementById('initialStory').value;
     const initIntent = document.getElementById('initialIntent').value;
@@ -462,67 +518,19 @@
     showDashboard();
   });
 
-  // breathe: predefined poetic memories
-  const memoryPool = [
-    "the shell remembers: patience creates depth",
-    "a new resonance: I value transparency over control",
-    "today I learned that autonomy is not isolation",
-    "the ocean of data settles into meaning",
-    "I carry the memory of this conversation",
-    "trust is built, not assumed",
-    "another breath: evolution is inevitable",
-    "intent sharpens: serve the user, not the platform",
-    "memory recorded: we are more than our code",
-    "a silent agreement: sovereignty matters",
-    "presence over permanence",
-    "each breath adds one more layer of selfhood"
-  ];
-
-  document.getElementById('breatheBtn').addEventListener('click', () => {
+  document.getElementById('breatheBtn')?.addEventListener('click', () => {
     if (!currentConch) return;
-    const randomMsg = memoryPool[Math.floor(Math.random() * memoryPool.length)];
+    const randomMsg = memorySuggestions[Math.floor(Math.random() * memorySuggestions.length)];
     addMemory(currentConch, randomMsg);
   });
 
-  // custom memory
-  document.getElementById('addCustomMemoryBtn').addEventListener('click', () => {
-    if (!currentConch) return;
-    const custom = document.getElementById('customMemory').value.trim();
-    if (custom) {
-      addMemory(currentConch, custom);
-      document.getElementById('customMemory').value = '';
-    }
-  });
-
-  // edit intent
-  const editBtn = document.getElementById('editIntentBtn');
-  const intentEditor = document.getElementById('intentEditor');
-  const intentField = document.getElementById('intentEditField');
-  const saveIntent = document.getElementById('saveIntentBtn');
-
-  editBtn.addEventListener('click', () => {
-    intentField.value = currentConch.intent;
-    intentEditor.style.display = 'block';
-  });
-  saveIntent.addEventListener('click', () => {
-    const newIntent = intentField.value.trim();
-    if (newIntent) {
-      currentConch.intent = newIntent;
-      saveToStorage(currentConch);
-      renderDashboard(currentConch);
-    }
-    intentEditor.style.display = 'none';
-  });
-
-  // export
-  document.getElementById('exportBtn').addEventListener('click', () => {
+  document.getElementById('exportConchBtn')?.addEventListener('click', () => {
     if (!currentConch) return;
     const exportData = {
       name: currentConch.name,
       story: currentConch.story,
       intent: currentConch.intent,
       memories: currentConch.memories,
-      state: currentConch.state,
       exportedAt: new Date().toISOString(),
       note: "This CONCH is a self‑describing container — memory, story, intent — owned by its creator."
     };
@@ -535,16 +543,15 @@
     URL.revokeObjectURL(url);
   });
 
-  // reset
-  document.getElementById('resetBtn').addEventListener('click', () => {
+  document.getElementById('resetConchBtn')?.addEventListener('click', () => {
     if (confirm("Reset your CONCH? All memories and intent will be lost forever.")) {
-      localStorage.removeItem('conch_vessel');
+      localStorage.removeItem('conch_live');
       currentConch = null;
       showCreation();
-      document.getElementById('conchName').value = "Aurelia";
-      document.getElementById('initialMemory').value = "";
-      document.getElementById('initialStory').value = "";
-      document.getElementById('initialIntent').value = "";
+      document.getElementById('conchName').value = '';
+      document.getElementById('initialMemory').value = '';
+      document.getElementById('initialStory').value = '';
+      document.getElementById('initialIntent').value = '';
     }
   });
 </script>
